@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {
+  class Retweet extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,15 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Post.init({
-    posted_at: DataTypes.DATE,
-    posted_by: DataTypes.BIGINT,
-    content: DataTypes.TEXT,
-    repost_id: DataTypes.BIGINT,
-    is_reply: DataTypes.BOOLEAN
+  Retweet.init({
+    user_id: DataTypes.BIGINT,
+    post_id: DataTypes.BIGINT,
+    retweet_comment: DataTypes.TEXT,
+    timestamp: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'Post',
+    modelName: 'Retweet',
   });
-  return Post;
+  return Retweet;
 };

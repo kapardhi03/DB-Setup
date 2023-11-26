@@ -2,21 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('Followers', {
+        await queryInterface.createTable('Auths', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
+                type: Sequelize.INTEGER
+            },
+            user_id: {
+                references: {
+                    key: "username",
+                    model: "User"
+                },
                 type: Sequelize.BIGINT
             },
-            follower_id: {
-                type: Sequelize.INTEGER
-            },
-            following_id: {
-                type: Sequelize.INTEGER
-            },
-            timestamp: {
-                type: Sequelize.DATE
+            //password must be hashed 
+            password: {
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             createdAt: {
                 allowNull: false,
@@ -29,6 +32,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('Followers');
+        await queryInterface.dropTable('Auths');
     }
 };

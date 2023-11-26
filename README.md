@@ -156,4 +156,50 @@
 	•	Constraints:
     
 	    •	sender_receiver_pair UNIQUE (sender_id, receiver_id)
-        
+
+
+
+
+# Commands 
+ 
+	Users Table:
+	
+		npx sequelize-cli model:generate --name User --attributes username:string,email:string,display_name:string,bio:text,date_of_birth:date,plus_verified:date
+
+	Auth Table:
+	
+		npx sequelize-cli model:generate --name Auth --attributes user_id:bigint,password:string
+
+	Posts Table:
+	
+		npx sequelize-cli model:generate --name Post --attributes posted_at:date,posted_by:bigint,content:text,repost_id:bigint,is_reply:boolean
+
+	Followers Table:
+	
+		npx sequelize-cli model:generate --name Follower --attributes follower_id:bigint,following_id:bigint,timestamp:date
+
+	Likes Table:
+	
+		npx sequelize-cli model:generate --name Like --attributes user_id:bigint,post_id:bigint,timestamp:date
+
+	Replies Table:
+	
+		npx sequelize-cli model:generate --name Reply --attributes user_id:bigint,post_id:bigint,reply_text:text,timestamp:date
+
+	Retweets Table:
+	
+		npx sequelize-cli model:generate --name Retweet --attributes user_id:bigint,post_id:bigint,retweet_comment:text,timestamp:date
+
+	Hashtags Table:
+	
+		npx sequelize-cli model:generate --name Hashtag --attributes hashtag_text:string,created_at:date
+
+	PostHashtags Table:
+	
+		npx sequelize-cli model:generate --name PostHashtag --attributes post_id:bigint,hashtag_id:bigint
+
+	Messages Table:
+	
+		npx sequelize-cli model:generate --name Message --attributes sender_id:bigint,receiver_id:bigint,message_text:text,timestamp:date
+
+	

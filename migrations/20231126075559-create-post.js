@@ -2,34 +2,36 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('Replies', {
+        await queryInterface.createTable('Posts', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            user_id: {
+            posted_at: {
+                type: Sequelize.DATE
+            },
+            posted_by: {
                 type: Sequelize.BIGINT,
-                allowNull: false,
                 references: {
-                    model: 'User',
-                    key: 'id',
+                    key: "id",
+                    model: "Users"
                 },
             },
-            post_id: {
-                type: Sequelize.BIGINT,
-                allowNull: false,
-                references: {
-                    model: 'Post',
-                    key: 'id',
-                },
-            },
-            reply_text: {
+            content: {
                 type: Sequelize.TEXT
             },
-            timestamp: {
-                type: Sequelize.DATE
+            repost_id: {
+                type: Sequelize.BIGINT,
+                allowNull: true,
+                references: {
+                    key: 2,
+                    model: "Post"
+                }
+            },
+            is_reply: {
+                type: Sequelize.BOOLEAN,
             },
             createdAt: {
                 allowNull: false,
@@ -42,6 +44,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('Replies');
+        await queryInterface.dropTable('Posts');
     }
 };
